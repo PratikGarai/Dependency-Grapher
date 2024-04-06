@@ -52,3 +52,9 @@ The output is a `output_graph.png` file in the current directory.
 Here is a snapshot of the tool used on a large Python project.
 
 ![Output Graph](./docs/img/output_graph_sample_3.png)
+
+## Future Work
+
+- [ ] Add support to auto identify circular dependencies.
+- [ ] Improve the graph markers and layout.
+- [ ] Add support for interactive graphs instead of static images.
