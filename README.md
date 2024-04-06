@@ -1,0 +1,54 @@
+# Dependency Grapher For Python
+
+This is a simple tool to generate a dependency graph for a Python project. It uses the `ast` module to parse the source code and extract the dependencies.
+
+## AIM 
+
+The real purpose of this tool is to generate a dependency graph for a large Python project. These graphs can be used to understand the structure of the project and identify the dependencies between different modules.
+
+## Usage
+
+```bash
+python graph_deps.py -r <directory_to_test> -i <ignore_subdir_1> <ignore_subdir_2> .... <ignore subdir n> -sv <scale vertical> -sh <scale horizontal>
+```
+
+As a general guideline, it is recommended to ignore the `venv` directories. Otherwise, the tool will try to parse the source code in the virtual environment as well.
+
+## Examples
+
+The following examples demonstrate how to use the tool. The `sample` directory contains a simple Python project for the same.
+
+### Example 1
+
+```bash
+python graph_deps.py -r sample -i ignore venv -sv 1 -sh 2
+```
+
+The above command will generate a dependency graph for the `sample` directory, ignoring drilling down into file present in the `ignore` and `venv` subdirectories. The `-sv` and `-sh` flags are used to scale the graph vertically and horizontally, respectively.
+
+#### Output
+
+The output is a `output_graph.png` file in the current directory.
+
+![Output Graph](./docs/img/output_graph_sample_1.png)
+
+### Example 2
+
+```bash
+python graph_deps.py -r sample -i venv -sv 1 -sh 1
+```
+
+The above command will generate a dependency graph for the `sample` directory, ignoring the `ignore` and `venv` subdirectories. The `-sv` and `-sh` flags are used to scale the graph vertically and horizontally, respectively.
+
+#### Output
+
+The output is a `output_graph.png` file in the current directory.
+
+![Output Graph](./docs/img/output_graph_sample_2.png)
+
+
+## Full Example
+
+Here is a snapshot of the tool used on a large Python project.
+
+![Output Graph](./docs/img/output_graph_sample_3.png)
