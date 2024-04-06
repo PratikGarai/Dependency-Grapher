@@ -1,5 +1,6 @@
 import ast
 
+
 class Entity:
     '''
     Entity class is used to store the information of the file.
@@ -19,7 +20,8 @@ class Entity:
         # self.own_functions = [f for f in node.body if isinstance(f, (ast.FunctionDef, ast.AsyncFunctionDef))]
         # self.own_variables = [v for v in node.body if isinstance(v, (ast.Assign))]
 
-        self.imports = [v for v in node.body if isinstance(v, (ast.ImportFrom, ast.Import))]
+        self.imports = [v for v in node.body if isinstance(
+            v, (ast.ImportFrom, ast.Import))]
         self.imported_modules = []
         for i in self.imports:
             if isinstance(i, ast.ImportFrom):
@@ -51,9 +53,9 @@ class Entity:
         #     elif isinstance(c, ast.Import):
         #         for obj in c.names:
         #             print(f"Direct Import : {obj.name}")
-        
+
         print("\nImported Modules: ")
         for m in self.imported_modules:
             print(m)
-        
+
         print("==============")

@@ -1,6 +1,7 @@
 import os
 
-class Explorer : 
+
+class Explorer:
     '''
     Class to recursively explore a directory and its subdirectories
     looking for .py files. Ignore directories mentioned in the ignore.
@@ -13,7 +14,7 @@ class Explorer :
         List of directories to ignore
     '''
 
-    def __init__(self, path : str, ignore : list[str]):
+    def __init__(self, path: str, ignore: list[str]):
         self.path = path
         self.ignore = ignore
 
@@ -31,7 +32,7 @@ class Explorer :
         for root, dirs, files in os.walk(self.path):
             # Remove directories to ignore
             dirs[:] = [d for d in dirs if d not in self.ignore]
-            
+
             # Add .py files to the list
             for file in files:
                 if file.endswith(".py"):
