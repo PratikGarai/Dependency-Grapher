@@ -1,16 +1,14 @@
 from src.explorer import Explorer
 from src.parser import Entity
+from src.grapher import Grapher
 
 if __name__ == "__main__":
-    explorer = Explorer("sample", ["ignore"])
-    py_files = explorer.explore()
-    print(py_files)
+    root = "sample"
+    ignore_list = ["ignore"]
+    
+    grapher = Grapher(root_folder=root, ignore_list=ignore_list)
 
-    entities: list[Entity] = []
-    for file in py_files:
-        entity = Entity(file)
-        entity.parse()
-        entities.append(entity)
+    # for entity in grapher.entities:
+    #     entity.display()
 
-    for entity in entities:
-        entity.display()
+    grapher.get_graph()
