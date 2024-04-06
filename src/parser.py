@@ -15,34 +15,45 @@ class Entity:
     def parse(self):
         node = ast.parse(open(self.path).read())
 
-        self.own_classes = [c for c in node.body if isinstance(c, ast.ClassDef)]
-        self.own_functions = [f for f in node.body if isinstance(f, (ast.FunctionDef, ast.AsyncFunctionDef))]
-        self.own_variables = [v for v in node.body if isinstance(v, (ast.Assign))]
+        # self.own_classes = [c for c in node.body if isinstance(c, ast.ClassDef)]
+        # self.own_functions = [f for f in node.body if isinstance(f, (ast.FunctionDef, ast.AsyncFunctionDef))]
+        # self.own_variables = [v for v in node.body if isinstance(v, (ast.Assign))]
 
         self.imports = [v for v in node.body if isinstance(v, (ast.ImportFrom, ast.Import))]
+        self.imported_modules = []
+        for i in self.imports:
+            if isinstance(i, ast.ImportFrom):
+                self.imported_modules.append(i.module)
+            elif isinstance(i, ast.Import):
+                for obj in i.names:
+                    self.imported_modules.append(obj.name)
 
     def display(self):
         print(f"==============\nPath: {self.path}")
-        print("\nClasses: ")
-        for c in self.own_classes:
-            print(c.name)
+        # print("\nClasses: ")
+        # for c in self.own_classes:
+        #     print(c.name)
 
-        print("\nFunctions: ")
-        for f in self.own_functions:
-            print(f.name)
+        # print("\nFunctions: ")
+        # for f in self.own_functions:
+        #     print(f.name)
 
-        print("\nVariables: ")
-        for v in self.own_variables:
-            print(v.targets[0].id)
+        # print("\nVariables: ")
+        # for v in self.own_variables:
+        #     print(v.targets[0].id)
 
-        print("\nImports: ")
-        for c in self.imports:
-            if isinstance(c, ast.ImportFrom):
-                print(f"Module : {c.module}")
-                for obj in c.names:
-                    print(obj.name)
-            elif isinstance(c, ast.Import):
-                for obj in c.names:
-                    print(f"Direct Import : {obj.name}")
+        # print("\nImports: ")
+        # for c in self.imports:
+        #     if isinstance(c, ast.ImportFrom):
+        #         print(f"Module : {c.module}")
+        #         for obj in c.names:
+        #             print(obj.name)
+        #     elif isinstance(c, ast.Import):
+        #         for obj in c.names:
+        #             print(f"Direct Import : {obj.name}")
+        
+        print("\nImported Modules: ")
+        for m in self.imported_modules:
+            print(m)
         
         print("==============")

@@ -1,5 +1,7 @@
 from uuid import uuid4
 
+N_ELEMENTS = 10
+
 class Elephant : 
     def __init__(self, name, age) : 
         self.name = name
