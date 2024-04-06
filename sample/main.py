@@ -2,8 +2,8 @@
 
 import math
 from collections import defaultdict
-from src.elephant import Elephant
-from ignore.dog import Dog
+from src.animals.elephant import Elephant
+from ignore.animals.dog import Dog
 
 class Cat:
     def __init__(self, name):

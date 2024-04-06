@@ -1,30 +1,16 @@
-import ast
-import os
-import glob
+from src.explorer import Explorer
+from src.parser import Entity
 
-files  = glob.glob("sample/**/*.py", recursive=True)
-print(files)
+if __name__ == "__main__":
+    explorer = Explorer("sample", ["ignore"])
+    py_files = explorer.explore()
+    print(py_files)
 
-entry = os.path.join("sample", "main.py")
+    entities: list[Entity] = []
+    for file in py_files:
+        entity = Entity(file)
+        entity.parse()
+        entities.append(entity)
 
-if __name__ == "__main__" :
-    node = ast.parse(open(entry).read())
-
-    print(type(node))
-
-    classes = [c for c in node.body if isinstance(c, ast.ClassDef)]
-    print("\nClasses: ")
-    for c in classes:
-        print(c.name)
-
-    functions = [f for f in node.body if isinstance(f, (ast.FunctionDef, ast.AsyncFunctionDef))]
-    print("\nFunctions: ")
-    for f in functions:
-        print(f.name)
-
-    imported_classes = [c for c in node.body if isinstance(c, (ast.ImportFrom))]
-    print("\nImported classes: ")
-    for c in imported_classes:
-        print(c.module)
-        for obj in c.names:
-            print(obj.name)
+    for entity in entities:
+        entity.display()
