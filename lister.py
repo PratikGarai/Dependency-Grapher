@@ -10,10 +10,7 @@ if __name__ == "__main__":
 
     grapher = Grapher(root_folder=root, ignore_list=ignore_list)
 
-    # for entity in grapher.entities:
-    #     entity.display()
-
     graph = grapher.get_graph()
     pos = graphviz_layout(graph, prog="dot")
-    nx.draw(graph, pos, with_labels=True, node_shape="o", node_size=[len(v) * 1000 for v in graph.nodes()])
-    plt.show()
+    nx.draw(graph, pos, with_labels=True, node_shape="o")
+    plt.savefig("image.png",bbox_inches='tight',dpi=100)
