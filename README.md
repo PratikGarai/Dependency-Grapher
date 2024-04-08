@@ -58,3 +58,5 @@ Here is a snapshot of the tool used on a large Python project.
 - [ ] Add support to auto identify circular dependencies.
 - [ ] Improve the graph markers and layout.
 - [ ] Add support for interactive graphs instead of static images.
+- [ ] Add support to export to Neo4j or other graph databases.
+- [ ] Add flag to ignore/show outliers and singletons.
