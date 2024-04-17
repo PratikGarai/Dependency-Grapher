@@ -1,8 +1,9 @@
 # Dependency Grapher For Python
 
-This is a simple tool to generate a dependency graph for a Python project. It uses the `ast` module to parse the source code and extract the dependencies.<br>
-Generated graphs can be used to understand the structure of the project and identify the dependencies between different modules.<br>
-Cycle detections are highlighed using red color by the program in the generated graph automatically.
+This is a simple tool to generate a dependency graph for a Python project. 
+1. It uses the `ast` module to parse the source code and extract the dependencies.<br>
+2. Generated graphs can be used to understand the structure of the project and identify the dependencies between different modules.<br>
+3. Cycle detections are highlighed using red color by the program in the generated graph automatically.
 
 ## AIM 
 
