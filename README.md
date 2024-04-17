@@ -46,6 +46,30 @@ The output is a `output_graph.png` file in the current directory.
 
 ![Output Graph](./docs/img/output_graph_sample_2.png)
 
+### Example 3 (Circular Dependency)
+
+```bash
+python graph_deps.py -r sample_cycle -i ignore venv -sv 1 -sh 1
+```
+
+This example covers a circular dependency. Here is the output of the full graph.
+
+#### Output
+
+![Output Graph](./docs/img/output_graph_sample_4.png)
+
+#### Filter Only Circular Dependencies
+
+```bash
+python graph_deps.py -r sample_cycle -i ignore venv -sv 1 -sh 1 -c
+```
+
+The `-c` flag is used to filter only the circular dependencies.
+
+#### Output
+
+![Output Graph](./docs/img/output_graph_sample_5.png)
+
 
 ## Full Example
 

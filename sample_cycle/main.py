@@ -5,6 +5,7 @@ from collections import defaultdict
 from src.animals.elephant import Elephant
 from ignore.animals.dog import Dog
 from src.animals.animals import Animal
+from src.animals.african_elephant import AfricanElephant
 
 class Cat(Animal):
     def __init__(self, name):
@@ -19,6 +20,9 @@ def add(a, b):
 if __name__ == "__main__":
     e = Elephant("Jumbo", 50)
     e.display()
+
+    ae = AfricanElephant("Dumbo")
+    ae.display()
 
     c = Cat("Whiskers")
     c.meow()

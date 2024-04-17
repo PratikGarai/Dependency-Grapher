@@ -1,4 +1,4 @@
-from src.animals.elephant import Elephant
+from src.animals.african_elephant import AfricanElephant
 
 class Animal :
     def __init__(self, name, age):
