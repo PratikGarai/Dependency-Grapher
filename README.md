@@ -1,6 +1,8 @@
 # Dependency Grapher For Python
 
-This is a simple tool to generate a dependency graph for a Python project. It uses the `ast` module to parse the source code and extract the dependencies.
+This is a simple tool to generate a dependency graph for a Python project. It uses the `ast` module to parse the source code and extract the dependencies.<br>
+Generated graphs can be used to understand the structure of the project and identify the dependencies between different modules.<br>
+Cycle detections are highlighed using red color by the program in the generated graph automatically.
 
 ## AIM 
 
@@ -49,10 +51,10 @@ The output is a `output_graph.png` file in the current directory.
 ### Example 3 (Circular Dependency)
 
 ```bash
-python graph_deps.py -r sample_cycle -i ignore venv -sv 1 -sh 1
+python graph_deps.py -r sample_cycle -i ignore venv -sv 1 -sh 2
 ```
 
-This example covers a circular dependency. Here is the output of the full graph.
+This example covers a circular dependency. Here is the output of the full graph. The program auto identifies the circular dependencies and highlights them.
 
 #### Output
 
@@ -61,7 +63,7 @@ This example covers a circular dependency. Here is the output of the full graph.
 #### Filter Only Circular Dependencies
 
 ```bash
-python graph_deps.py -r sample_cycle -i ignore venv -sv 1 -sh 1 -c
+python graph_deps.py -r sample_cycle -i ignore venv -sv 1 -sh 2 -c
 ```
 
 The `-c` flag is used to filter only the circular dependencies.
@@ -79,7 +81,7 @@ Here is a snapshot of the tool used on a large Python project.
 
 ## Future Work
 
-- [ ] Add support to auto identify circular dependencies.
+- [x] Add support to auto identify circular dependencies.
 - [ ] Improve the graph markers and layout.
 - [ ] Add support for interactive graphs instead of static images.
 - [ ] Add support to export to Neo4j or other graph databases.
