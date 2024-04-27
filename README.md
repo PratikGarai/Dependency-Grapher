@@ -73,6 +73,15 @@ The `-c` flag is used to filter only the circular dependencies.
 
 ![Output Graph](./docs/img/output_graph_sample_5.png)
 
+### Example 4 (Neo4j Export)
+
+```bash
+python graph_deps.py -r sample_cycle -i ignore venv -e neo --neo-url <neo4j datababse url> --neo-username <neo4j db username> --neo-password <neo4j db password>
+```
+
+This example covers exporting the graph to a Neo4j database. The `--neo-url`, `--neo-username`, and `--neo-password` flags are used to specify the Neo4j database URL, username, and password, respectively.
+
+![Output Graph](./docs/img/output_graph_sample_6.png)
 
 ## Full Example
 
@@ -85,5 +94,5 @@ Here is a snapshot of the tool used on a large Python project.
 - [x] Add support to auto identify circular dependencies.
 - [ ] Improve the graph markers and layout.
 - [ ] Add support for interactive graphs instead of static images.
-- [ ] Add support to export to Neo4j or other graph databases.
+- [x] Add support to export to Neo4j or other graph databases.
 - [ ] Add flag to ignore/show outliers and singletons.

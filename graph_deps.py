@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 
 import matplotlib.pyplot as plt
 import networkx as nx
-from neo4j import GraphDatabase
+from neo4j import GraphDatabase, ManagedTransaction
 
 from src.grapher import Grapher
 
@@ -20,9 +20,49 @@ def create_img_output(graph: nx.DiGraph, scalev: float, scaleh: float, colors=No
 
 
 def create_neo_output(graph: nx.DiGraph, url: str, username: str, password: str):
+
+    def check_node(tx: ManagedTransaction, name: str) -> bool:
+        result = tx.run(
+            "MATCH (n:Node {name : $name}) RETURN n LIMIT 1", name=name)
+        result = result.single()
+        return result != None
+
+    def create_node(tx: ManagedTransaction, name: str):
+        # Check if node already exists
+        exists = check_node(tx, name)
+        if not exists:
+            result = tx.run(
+                "CREATE (n:Node {name : $name}) RETURN n", name=name)
+            # Check if node got created
+            result = tx.run(
+                "MATCH (n:Node {name : $name}) RETURN n LIMIT 1", name=name)
+            result = result.single()
+            assert result != None
+            print(f"Created node {name}")
+        else:
+            print(f"Node exists {name}")
+
+    def create_edge(tx: ManagedTransaction, node_from: str, node_to: str):
+        # Check if nodes exist to create edge
+        assert check_node(tx, node_from), "Source node for edge does not exist"
+        assert check_node(
+            tx, node_to), "Destination node for edge does not exist"
+        tx.run("""
+               MATCH (nf:Node {name : $node_from})
+               MATCH (nt:Node {name : $node_to})
+               MERGE (nf)-[r:USES]->(nt)""",
+               node_from=node_from, node_to=node_to)
+        print(f"Created edge between {node_from} and {node_to}")
+
     with GraphDatabase.driver(url, auth=(username, password)) as driver:
         driver.verify_connectivity()
-    pass
+        with driver.session() as session:
+            for n in graph.nodes:
+                session.execute_write(create_node, str(n))
+            for e in graph.edges:
+                session.execute_write(create_edge, str(e[0]), str(e[1]))
+    print("Completed export to Neo4j Database")
+
 
 if __name__ == "__main__":
 
